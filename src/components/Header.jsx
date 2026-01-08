@@ -3,7 +3,7 @@ import { Menu, X, Phone } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
 
-import logo from '../assets/logo.svg';
+
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -22,7 +22,7 @@ const Header = () => {
 
   const Logo = () => (
     <Link to="/" className="logo-container" onClick={closeMenu}>
-      <img src={logo} alt="IPCS Logo" className="logo-img" />
+      <img src="/logo.svg" alt="IPCS Logo" className="logo-img" />
       <span className="logo-text">
         <span className="logo-title" style={{ fontSize: '1.2rem', lineHeight: '1.2', maxWidth: '200px' }}>Industrial Pest Control Services</span>
       </span>
