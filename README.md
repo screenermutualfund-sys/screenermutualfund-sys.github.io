@@ -1,16 +1,38 @@
-# React + Vite
+# IPCS Website Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a React application built with Vite. It is hosted on GitHub Pages.
 
-Currently, two official plugins are available:
+## Deployment Workflow
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project uses a **manual deployment** strategy where the build process happens locally on your computer, and the resulting static files are pushed to a specific branch on GitHub for hosting.
 
-## React Compiler
+### Step-by-Step Flow
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+#### 1. Local Build Process
+When you run the command `npm run deploy`:
 
-## Expanding the ESLint configuration
+1.  **Build Command**: The script first runs `npm run build`.
+2.  **Vite Compilation**: Vite takes all your source code (`src/`), React components, CSS, and images.
+3.  **Optimization**: It compiles, minifies, and bundles them into efficient static files (HTML, CSS, JS).
+4.  **Output**: These ready-to-serve files are placed into a local folder named `dist` (Distribution).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+#### 2. The Deployment Tool (gh-pages)
+After the build is complete, the `gh-pages` tool takes over:
+
+1.  **Branch Switching**: It connects to your GitHub repository.
+2.  **Upload**: It takes **only** the contents of the `dist` folder.
+3.  **Push**: It forces these files into a special Git branch named `gh-pages`.
+    *   *Note: This branch does not contain your source code (`src`), only the final built website.*
+
+#### 3. GitHub Hosting
+Once the files reach GitHub:
+
+1.  **Detection**: GitHub's internal systems notice a new commit on the `gh-pages` branch.
+2.  **Serving**: GitHub Pages automatically updates its web servers to serve the new `index.html` and assets from that branch.
+3.  **Live**: Your changes become visible at https://screenermutualfund-sys.github.io/IPCS/ (or your custom domain).
+
+## Development Commands
+
+- `npm run dev`: Starts the local development server.
+- `npm run build`: Compiles the project to the `dist` folder.
+- `npm run deploy`: Builds the project AND uploads it to GitHub Pages.
