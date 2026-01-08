@@ -1,38 +1,41 @@
 # IPCS Website Project
 
-This project is a React application built with Vite. It is hosted on GitHub Pages.
+This project is a React application built with Vite. It is hosted directly from the **`main`** branch on GitHub Pages.
 
-## Deployment Workflow
+## Deployment Strategy (Updated)
 
-This project uses a **manual deployment** strategy where the build process happens locally on your computer, and the resulting static files are pushed to a specific branch on GitHub for hosting.
+We have switched to a `docs/` folder deployment strategy. This means the built website lives in the `docs` folder of the `main` branch, rather than a separate `gh-pages` branch.
 
-### Step-by-Step Flow
+### Configuration Changes
+1.  **Build Output**: `vite.config.js` is set to output built files to `docs/` instead of `dist/`.
+2.  **Logo/Images**: The logo is placed in the `public/` directory (`public/logo.svg`) and accessed via absolute path (`/logo.svg`) to ensure it loads correctly in production.
+3.  **Routing**: We use `HashRouter` to prevent 404 errors on GitHub Pages.
 
-#### 1. Local Build Process
-When you run the command `npm run deploy`:
+### How to Update the Website
 
-1.  **Build Command**: The script first runs `npm run build`.
-2.  **Vite Compilation**: Vite takes all your source code (`src/`), React components, CSS, and images.
-3.  **Optimization**: It compiles, minifies, and bundles them into efficient static files (HTML, CSS, JS).
-4.  **Output**: These ready-to-serve files are placed into a local folder named `dist` (Distribution).
+To publish changes, follow this simple workflow:
 
-#### 2. The Deployment Tool (gh-pages)
-After the build is complete, the `gh-pages` tool takes over:
+1.  **Make Changes**: Edit your code in the `src` folder.
+2.  **Build**: Run the build command to update the `docs` folder.
+    ```bash
+    npm run build
+    ```
+3.  **Push**: Commit and push everything to GitHub.
+    ```bash
+    git add .
+    git commit -m "Your update message"
+    git push origin main
+    ```
 
-1.  **Branch Switching**: It connects to your GitHub repository.
-2.  **Upload**: It takes **only** the contents of the `dist` folder.
-3.  **Push**: It forces these files into a special Git branch named `gh-pages`.
-    *   *Note: This branch does not contain your source code (`src`), only the final built website.*
+**That's it!** GitHub Pages will detect the changes in the `docs` folder and update the site automatically.
 
-#### 3. GitHub Hosting
-Once the files reach GitHub:
-
-1.  **Detection**: GitHub's internal systems notice a new commit on the `gh-pages` branch.
-2.  **Serving**: GitHub Pages automatically updates its web servers to serve the new `index.html` and assets from that branch.
-3.  **Live**: Your changes become visible at https://screenermutualfund-sys.github.io/IPCS/ (or your custom domain).
+## GitHub Pages Settings
+Ensure your repository settings are configured as follows:
+- **Source**: Deploy from a branch
+- **Branch**: `main`
+- **Folder**: `/docs`
 
 ## Development Commands
 
 - `npm run dev`: Starts the local development server.
-- `npm run build`: Compiles the project to the `dist` folder.
-- `npm run deploy`: Builds the project AND uploads it to GitHub Pages.
+- `npm run build`: Compiles the project to the `docs` folder.
