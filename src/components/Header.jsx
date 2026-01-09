@@ -24,7 +24,7 @@ const Header = () => {
     <Link to="/" className="logo-container" onClick={closeMenu}>
       <img src="/logo.svg" alt="IPCS Logo" className="logo-img" />
       <span className="logo-text">
-        <span className="logo-title" style={{ fontSize: '1.2rem', lineHeight: '1.2', maxWidth: '200px' }}>Industrial Pest Control Services</span>
+        <span className="logo-title">Industrial Pest Control Services</span>
       </span>
     </Link>
   );
