@@ -28,12 +28,33 @@ const Contact = () => {
         const PUBLIC_KEY = 'tenr97rW3Y-Y-hleN';
 
         // Construct the custom message format requested
-        const emailContent = `Hi ${formData.name}
+        const emailContent = `Dear Team,
 
-the user from ${formData.company || 'their company'} has asked this query 
+You have received a new service inquiry via the website contact form. Below are the details of the potential client:
+
+--------------------------------------------------
+CLIENT DETAILS
+--------------------------------------------------
+Name         : ${formData.name}
+Company      : ${formData.company || 'Not Provided'}
+Phone Number : ${formData.phone}
+Email Address: ${formData.email || 'Not Provided'}
+
+--------------------------------------------------
+SERVICE REQUEST
+--------------------------------------------------
+Service Type : ${formData.service}
+
+--------------------------------------------------
+MESSAGE / QUERY
+--------------------------------------------------
 ${formData.message}
 
-Thanks and regards`;
+--------------------------------------------------
+Please contact this lead at your earliest convenience.
+
+Best regards,
+IPCS Website Notification System`;
 
         const templateParams = {
             to_email: '<mailid>', // Configure your EmailJS template to use {{to_email}} as the recipient
