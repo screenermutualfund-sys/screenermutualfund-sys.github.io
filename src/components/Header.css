@@ -51,10 +51,13 @@
 }
 
 .logo-title {
-    font-weight: 800;
-    font-size: 1.5rem;
+    font-weight: 600;
+    font-size: 1.3rem;
+    /* Adjusted base size */
     line-height: 1;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
+    white-space: nowrap;
+    /* Force single line */
 }
 
 .logo-subtitle {
@@ -174,5 +177,24 @@
 
     .desktop-nav {
         display: flex;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-title {
+        font-size: 0.9rem;
+        /* Smaller font for mobile */
+    }
+
+    .logo-img {
+        height: 35px;
+        /* Slightly smaller logo on very small screens */
+    }
+}
+
+@media (min-width: 481px) and (max-width: 1024px) {
+    .logo-title {
+        font-size: 1.1rem;
+        /* Tablet size */
     }
 }
