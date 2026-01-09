@@ -22,10 +22,10 @@ const Contact = () => {
         e.preventDefault();
         setStatus('sending');
 
-        // Replace these with your actual Service ID, Template ID, and Public Key from EmailJS
-        const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
-        const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
-        const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
+        // EmailJS Configuration
+        const SERVICE_ID = 'service_0dkm70x';
+        const TEMPLATE_ID = 'template_qj4kmec';
+        const PUBLIC_KEY = 'tenr97rW3Y-Y-hleN';
 
         // Construct the custom message format requested
         const emailContent = `Hi ${formData.name}
