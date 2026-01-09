@@ -23,12 +23,29 @@ const Contact = () => {
         setStatus('sending');
 
         // Replace these with your actual Service ID, Template ID, and Public Key from EmailJS
-        // ideally store these in a .env file: import.meta.env.VITE_EMAILJS_SERVICE_ID
         const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
         const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
         const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
 
-        emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
+        // Construct the custom message format requested
+        const emailContent = `Hi ${formData.name}
+
+the user from ${formData.company || 'their company'} has asked this query 
+${formData.message}
+
+Thanks and regards`;
+
+        const templateParams = {
+            to_email: '<mailid>', // Configure your EmailJS template to use {{to_email}} as the recipient
+            from_name: formData.name,
+            company_name: formData.company,
+            phone: formData.phone,
+            service_type: formData.service,
+            query: formData.message,
+            message: emailContent // Use {{message}} in your EmailJS template to show the full formatted text
+        };
+
+        emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
             .then((result) => {
                 console.log(result.text);
                 setStatus('success');
