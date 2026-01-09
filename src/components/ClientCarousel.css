@@ -1,6 +1,8 @@
+/* Client Carousel Section */
 .client-section {
     padding: 4rem 0;
     overflow: hidden;
+    background-color: var(--color-background-light, #f8fafc);
 }
 
 .text-center {
@@ -20,49 +22,142 @@
 }
 
 .carousel-wrapper {
-    position: relative;
+    margin-top: 3rem;
     width: 100%;
+    position: relative;
     overflow: hidden;
-    padding: 1rem 0;
+    /* Mask edges for a smooth fade effect */
     mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
+
+/* Track for Infinite Scroll */
 .carousel-track {
     display: flex;
+    gap: 2rem;
     width: max-content;
-    animation: scroll 40s linear infinite;
-    gap: 3rem;
+    animation: scroll 60s linear infinite;
 }
 
-.client-slide {
-    flex-shrink: 0;
+.carousel-track:hover {
+    animation-play-state: paused;
+}
+
+/* Card Styling */
+.client-card {
+    background: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border-radius: 12px;
+    height: 100px;
+    width: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1rem 2rem;
-    background: var(--color-bg-off-white);
-    border-radius: 50px;
-    border: 1px solid var(--color-border);
-    white-space: nowrap;
+    padding: 0.5rem;
+    /* Reduced padding to make logos bigger */
+    border: 1px solid #e2e8f0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.client-name {
+.client-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Logo Image */
+.client-logo {
+    max-width: 90%;
+    /* Increased max-width */
+    max-height: 90%;
+    /* Increased max-height */
+    object-fit: contain;
+    /* Removed grayscale filter */
+    opacity: 1;
+    mix-blend-mode: multiply;
+    transition: all 0.3s ease;
+}
+
+.client-card:hover .client-logo {
+    transform: scale(1.05);
+    /* Subtle zoom on hover */
+}
+
+/* Specific adjustment for smaller logos */
+.client-logo.logo-enlarged {
+    transform: scale(1.35);
+    /* Base scale up for HTC/Ohris */
+}
+
+.client-card:hover .client-logo.logo-enlarged {
+    transform: scale(1.45);
+    /* Maintain zoom effect on hover */
+}
+
+/* Fallback Container */
+.client-fallback {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+/* Tooltip for Logos */
+.client-tooltip {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 0.8rem;
+    padding: 0.25rem;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    pointer-events: none;
+}
+
+.client-card:hover .client-tooltip {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Fallback Text */
+.client-text {
     font-weight: 600;
-    color: var(--color-text-dark);
-    font-size: 1.1rem;
+    color: #475569;
+    font-size: 0.9rem;
+    text-align: center;
+    line-height: 1.2;
 }
 
+/* Animation */
 @keyframes scroll {
     0% {
         transform: translateX(0);
     }
 
     100% {
-        transform: translateX(-50%);
+        /* Move by 1/3 since we tripled the list */
+        transform: translateX(calc(-100% / 3));
     }
 }
 
-/* Pause on hover for accessibility/readability */
-.carousel-track:hover {
-    animation-play-state: paused;
+/* Responsive */
+@media (max-width: 768px) {
+    .client-card {
+        height: 110px;
+        /* Slightly taller for stacked text */
+        width: 160px;
+        padding: 0.75rem;
+    }
+
+    .client-text {
+        font-size: 0.8rem;
+    }
 }
